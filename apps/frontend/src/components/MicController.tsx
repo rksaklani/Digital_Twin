@@ -63,7 +63,6 @@ export function MicController() {
           width: '56px',
           height: '56px',
           borderRadius: '50%',
-          border: 'none',
           background: isMuted 
             ? 'linear-gradient(135deg, rgba(244, 67, 54, 0.85), rgba(198, 40, 40, 0.75))'
             : connectionState === 'connected'
@@ -87,9 +86,6 @@ export function MicController() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: connectionState === 'connected'
-            ? '0 4px 20px rgba(76, 175, 80, 0.3)'
-            : '0 4px 16px rgba(0, 0, 0, 0.2)',
           transition: 'all 0.3s ease',
         }}
         onMouseEnter={(e) => {
