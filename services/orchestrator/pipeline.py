@@ -227,14 +227,14 @@ class Pipeline:
             await self.initialize_services()
             self.running = True
             
-        # Start avatar renderer
-        await self.services['avatar'].start()
-        
-        # Start WebRTC server (this will handle connections)
-        await self.services['webrtc'].start()
-        
-        # Start STT service
-        await self.services['stt'].start()
+            # Start avatar renderer
+            await self.services['avatar'].start()
+            
+            # Start WebRTC server (this will handle connections)
+            await self.services['webrtc'].start()
+            
+            # Start STT service
+            await self.services['stt'].start()
             
             # Main event loop
             while self.running:
