@@ -72,6 +72,7 @@ export function MicController() {
       <span style={{ fontSize: '14px', color: '#999' }}>
         {connectionState === 'connected' ? 'Connected' : 
          connectionState === 'connecting' ? 'Connecting...' : 
+         connectionState === 'error' ? 'Error' :
          'Disconnected'}
       </span>
     </div>

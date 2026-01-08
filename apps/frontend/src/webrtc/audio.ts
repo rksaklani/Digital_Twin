@@ -1,5 +1,10 @@
 export async function captureAudio(): Promise<MediaStream> {
   try {
+    // Check if getUserMedia is available
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      throw new Error('Microphone access is not supported in this browser.')
+    }
+
     const stream = await navigator.mediaDevices.getUserMedia({
       audio: {
         channelCount: 1,
@@ -13,9 +18,23 @@ export async function captureAudio(): Promise<MediaStream> {
 
     console.log('[Audio] Microphone captured')
     return stream
-  } catch (error) {
+  } catch (error: any) {
     console.error('[Audio] Failed to capture microphone:', error)
-    throw new Error('Failed to access microphone. Please check permissions.')
+    
+    // Provide more specific error messages
+    let errorMessage = 'Failed to access microphone.'
+    
+    if (error.name === 'NotAllowedError' || error.name === 'PermissionDeniedError') {
+      errorMessage = 'Microphone permission denied. Please allow microphone access in your browser settings.'
+    } else if (error.name === 'NotFoundError' || error.name === 'DevicesNotFoundError') {
+      errorMessage = 'No microphone found. Please connect a microphone and try again.'
+    } else if (error.name === 'NotReadableError' || error.name === 'TrackStartError') {
+      errorMessage = 'Microphone is already in use by another application.'
+    } else if (error.name === 'OverconstrainedError') {
+      errorMessage = 'Microphone constraints could not be satisfied.'
+    }
+    
+    throw new Error(errorMessage)
   }
 }
 
