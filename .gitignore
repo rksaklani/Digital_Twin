@@ -89,21 +89,17 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Frontend build
+# Frontend
 apps/frontend/dist/
 apps/frontend/.vite/
+apps/frontend/node_modules/
 
-# Signaling build
+# Signaling
 apps/signaling/dist/
+apps/signaling/node_modules/
 
 # Python virtual environments
 venv/
 env/
 ENV/
 .venv
-
-# Node modules (all locations)
-node_modules/
-apps/frontend/node_modules/
-apps/signaling/node_modules/
-
