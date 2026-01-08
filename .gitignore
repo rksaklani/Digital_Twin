@@ -17,8 +17,13 @@ build/
 htmlcov/
 *.log
 
-# Node.js
+# Node.js - ignore ALL node_modules everywhere
 node_modules/
+**/node_modules/
+apps/frontend/node_modules/
+apps/signaling/node_modules/
+
+# Node.js logs and lock files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -92,11 +97,9 @@ dmypy.json
 # Frontend
 apps/frontend/dist/
 apps/frontend/.vite/
-apps/frontend/node_modules/
 
 # Signaling
 apps/signaling/dist/
-apps/signaling/node_modules/
 
 # Python virtual environments
 venv/
