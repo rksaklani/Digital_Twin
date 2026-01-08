@@ -19,9 +19,15 @@ function App() {
   const handleRequestMic = async () => {
     setMicPermissionRequested(true)
     try {
+      // Check if browser supports getUserMedia before attempting
+      if (!navigator.mediaDevices && !(navigator as any).getUserMedia) {
+        useSessionStore.getState().setError('Microphone access is not supported in this browser. Please use Chrome, Firefox, or Edge.')
+        return
+      }
       await initializeWebRTC()
     } catch (err) {
       console.error('Failed to initialize WebRTC:', err)
+      // Error is already set in the store by initializeWebRTC
     }
   }
 
