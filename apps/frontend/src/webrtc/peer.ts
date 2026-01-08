@@ -2,7 +2,7 @@ import { captureAudio } from './audio'
 import { setupVideoTrack } from './video'
 import { useSessionStore } from '../state/session'
 
-const SIGNALING_URL = process.env.VITE_SIGNALING_URL || 'ws://localhost:8080'
+const SIGNALING_URL = import.meta.env.VITE_SIGNALING_URL || 'ws://localhost:8080'
 
 let peerConnection: RTCPeerConnection | null = null
 let signalingWs: WebSocket | null = null
