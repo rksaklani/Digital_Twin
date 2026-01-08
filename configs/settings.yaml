@@ -1,0 +1,43 @@
+# Main Settings Configuration
+# Central configuration for the Digital Clone system
+
+# Server settings
+server:
+  signaling_host: "0.0.0.0"
+  signaling_port: 8080
+  webrtc_port: 8081
+  debug: true
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "./logs/pipeline.log"
+  console: true
+
+# Paths
+paths:
+  models: "./models"
+  data: "./data"
+  configs: "./configs"
+  logs: "./logs"
+  temp: "./tmp"
+
+# Feature flags
+features:
+  enable_stt: true
+  enable_llm: true
+  enable_tts: true
+  enable_avatar: true
+  enable_intent_detection: true
+  enable_interrupt_handling: true
+  enable_latency_monitoring: true
+
+# Development
+development:
+  mock_services: false  # Use mock services for testing
+  skip_gpu_check: false
+  verbose_logging: false
+  save_debug_audio: false
+  save_debug_video: false
+

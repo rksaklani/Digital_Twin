@@ -53,10 +53,17 @@ models/*
 *.gguf
 *.bin
 data/audio/raw/*
+<<<<<<< HEAD
 !data/audio/raw/.gitkeep
 data/audio/clean/*
 !data/audio/clean/.gitkeep
 data/video/*
+=======
+data/audio/clean/*
+data/video/*
+!data/audio/raw/.gitkeep
+!data/audio/clean/.gitkeep
+>>>>>>> 138d879421987a8b1595249145ef774e56c65427
 !data/video/.gitkeep
 
 # Build outputs
