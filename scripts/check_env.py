@@ -78,6 +78,13 @@ def check_directories():
         "services",
         "configs",
         "data",
+        "data/audio",
+        "data/audio/raw",
+        "data/audio/clean",
+        "data/video",
+        "models",
+        "logs",
+        "tmp",
     ]
     
     all_exist = True
@@ -106,6 +113,45 @@ def check_config_files():
             print(f"✅ {config_file}")
         else:
             print(f"❌ {config_file} missing")
+            all_exist = False
+    
+    return all_exist
+
+
+def check_data_files():
+    """Check required data files exist"""
+    data_files = [
+        ("data/audio/clean/reference.wav", "Voice cloning reference audio"),
+        ("data/video/face_source.mp4", "Face source video for avatar"),
+    ]
+    
+    all_exist = True
+    for file_path, description in data_files:
+        if Path(file_path).exists():
+            file_size = Path(file_path).stat().st_size / (1024 * 1024)  # MB
+            print(f"✅ {file_path} ({file_size:.1f} MB) - {description}")
+        else:
+            print(f"⚠️  {file_path} missing - {description}")
+            all_exist = False
+    
+    return all_exist
+
+
+def check_model_files():
+    """Check required model files exist"""
+    model_files = [
+        ("models/llama-3.1-8b-instruct-q4_k_m.gguf", "LLM model (Language Model)"),
+        ("models/wav2lip_gan.pth", "Wav2Lip model (Lip Sync)"),
+        ("models/mobilenet.pth", "Face detection model"),
+    ]
+    
+    all_exist = True
+    for file_path, description in model_files:
+        if Path(file_path).exists():
+            file_size = Path(file_path).stat().st_size / (1024 * 1024)  # MB
+            print(f"✅ {file_path} ({file_size:.1f} MB) - {description}")
+        else:
+            print(f"⚠️  {file_path} missing - {description}")
             all_exist = False
     
     return all_exist
@@ -152,10 +198,23 @@ def main():
     checks.append(check_config_files())
     print()
     
+    print("Data Files:")
+    data_check = check_data_files()
+    print()
+    
+    print("Model Files:")
+    model_check = check_model_files()
+    print()
+    
     print("=" * 60)
     if all(checks):
-        print("✅ All checks passed!")
-        return 0
+        if data_check and model_check:
+            print("✅ All checks passed!")
+            return 0
+        else:
+            print("⚠️  Core environment OK, but some data/model files are missing.")
+            print("   See docs/directory_usage.md for setup instructions.")
+            return 0  # Don't fail, just warn
     else:
         print("❌ Some checks failed. Please fix the issues above.")
         return 1

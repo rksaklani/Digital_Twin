@@ -18,7 +18,7 @@ vad:
   model_path: null  # Auto-download if null
   threshold: 0.5
   min_speech_duration_ms: 250
-  max_speech_duration_s: float('inf')
+  max_speech_duration_s: .inf  # Unlimited speech duration
   min_silence_duration_ms: 100
   speech_pad_ms: 30
 

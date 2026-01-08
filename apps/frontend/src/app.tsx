@@ -5,6 +5,7 @@ import { StatusOverlay } from './components/StatusOverlay'
 import { DebugPanel } from './components/DebugPanel'
 import { useSessionStore } from './state/session'
 import { initializeWebRTC } from './webrtc/peer'
+import './styles.css'
 
 function App() {
   const [debugVisible, setDebugVisible] = useState(false)
@@ -32,14 +33,14 @@ function App() {
   }
 
   return (
-    <div style={{
+    <div className="white-bg" style={{
       width: '100vw',
       height: '100vh',
       display: 'flex',
       flexDirection: 'column',
-      backgroundColor: '#000',
-      color: '#fff',
-      fontFamily: 'system-ui, -apple-system, sans-serif',
+      color: '#333',
+      position: 'relative',
+      overflow: 'hidden',
     }}>
       {/* Main content area */}
       <div style={{
@@ -49,39 +50,51 @@ function App() {
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
+        padding: '20px',
       }}>
         <AvatarView />
         <StatusOverlay />
         
         {/* Permission request overlay */}
         {!micPermissionRequested && connectionState === 'disconnected' && (
-          <div style={{
+          <div className="glass-card" style={{
             position: 'absolute',
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            backgroundColor: 'rgba(0, 0, 0, 0.9)',
-            padding: '30px',
-            borderRadius: '8px',
+            padding: '40px',
+            borderRadius: '20px',
             textAlign: 'center',
-            border: '1px solid #444',
             zIndex: 1000,
+            minWidth: '400px',
           }}>
-            <h2 style={{ margin: '0 0 15px 0', color: '#fff' }}>Microphone Access Required</h2>
-            <p style={{ margin: '0 0 20px 0', color: '#ccc', fontSize: '14px' }}>
-              This application needs microphone access to enable voice interaction.
+            <h2 style={{ 
+              margin: '0 0 15px 0', 
+              color: '#333',
+              fontSize: '24px',
+              fontWeight: '600',
+            }}>
+              Microphone Access Required
+            </h2>
+            <p style={{ 
+              margin: '0 0 30px 0', 
+              color: '#666', 
+              fontSize: '14px',
+              lineHeight: '1.6',
+            }}>
+              This application needs microphone access to enable voice interaction with your digital twin.
             </p>
             <button
               onClick={handleRequestMic}
+              className="glass-button glass-button-primary"
               style={{
-                padding: '12px 24px',
-                backgroundColor: '#4CAF50',
+                padding: '14px 32px',
                 color: '#fff',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer',
+                borderRadius: '12px',
                 fontSize: '16px',
-                fontWeight: 'bold',
+                fontWeight: '600',
+                border: 'none',
+                cursor: 'pointer',
               }}
             >
               Allow Microphone Access
@@ -91,31 +104,31 @@ function App() {
         
         {/* Error message */}
         {error && (
-          <div style={{
+          <div className="glass-card" style={{
             position: 'absolute',
-            bottom: '100px',
+            bottom: '120px',
             left: '50%',
             transform: 'translateX(-50%)',
-            backgroundColor: 'rgba(244, 67, 54, 0.9)',
-            padding: '15px 20px',
-            borderRadius: '4px',
-            color: '#fff',
+            padding: '20px 30px',
+            borderRadius: '16px',
+            color: '#333',
             maxWidth: '500px',
             textAlign: 'center',
             zIndex: 1000,
+            background: 'rgba(244, 67, 54, 0.1)',
+            border: '1px solid rgba(244, 67, 54, 0.3)',
           }}>
-            <p style={{ margin: 0, fontSize: '14px' }}>{error}</p>
+            <p style={{ margin: 0, fontSize: '14px', fontWeight: '500', color: '#d32f2f' }}>{error}</p>
             <button
               onClick={handleRequestMic}
+              className="glass-button"
               style={{
-                marginTop: '10px',
-                padding: '8px 16px',
-                backgroundColor: '#fff',
-                color: '#f44336',
-                border: 'none',
-                borderRadius: '4px',
+                marginTop: '15px',
+                padding: '10px 20px',
+                borderRadius: '8px',
                 cursor: 'pointer',
                 fontSize: '12px',
+                fontWeight: '500',
               }}
             >
               Try Again
@@ -125,24 +138,27 @@ function App() {
       </div>
 
       {/* Controls */}
-      <div style={{
-        padding: '20px',
+      <div className="glass-dark" style={{
+        padding: '24px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         gap: '20px',
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        borderRadius: '24px 24px 0 0',
+        margin: '0 20px 0 20px',
+        position: 'relative',
       }}>
         <MicController />
         <button
           onClick={() => setDebugVisible(!debugVisible)}
+          className="glass-button"
           style={{
-            padding: '10px 20px',
-            backgroundColor: debugVisible ? '#444' : '#222',
-            color: '#fff',
-            border: '1px solid #666',
-            borderRadius: '4px',
+            padding: '12px 24px',
+            borderRadius: '12px',
             cursor: 'pointer',
+            fontSize: '14px',
+            fontWeight: '500',
+            border: 'none',
           }}
         >
           {debugVisible ? 'Hide' : 'Show'} Debug

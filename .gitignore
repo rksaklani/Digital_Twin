@@ -45,15 +45,18 @@ yarn.lock
 .env.*.local
 
 # Models and data (large files)
-models/
+models/*
+!models/.gitkeep
 *.pth
 *.pt
 *.ckpt
 *.gguf
 *.bin
 data/audio/raw/*
-data/video/*
 !data/audio/raw/.gitkeep
+data/audio/clean/*
+!data/audio/clean/.gitkeep
+data/video/*
 !data/video/.gitkeep
 
 # Build outputs
@@ -62,7 +65,8 @@ build/
 *.tsbuildinfo
 
 # Logs
-logs/
+logs/*
+!logs/.gitkeep
 *.log
 
 # OS
@@ -70,7 +74,8 @@ Thumbs.db
 .DS_Store
 
 # Temporary files
-tmp/
+tmp/*
+!tmp/.gitkeep
 temp/
 *.tmp
 *.bak

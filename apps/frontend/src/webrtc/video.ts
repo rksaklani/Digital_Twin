@@ -7,7 +7,23 @@ export function setupVideoTrack(stream: MediaStream): void {
     videoElement.playsInline = true
     videoElement.style.width = '100%'
     videoElement.style.height = '100%'
-    videoElement.style.objectFit = 'contain'
+    videoElement.style.objectFit = 'cover'
+    videoElement.style.borderRadius = '24px'
+    videoElement.style.boxShadow = '0 8px 32px 0 rgba(31, 38, 135, 0.37)'
+    videoElement.style.opacity = '0'
+    videoElement.style.transition = 'opacity 0.5s ease'
+    
+    // Hide placeholder when video starts playing
+    videoElement.addEventListener('playing', () => {
+      const placeholder = document.getElementById('avatar-placeholder')
+      if (placeholder) {
+        placeholder.style.opacity = '0'
+        placeholder.style.pointerEvents = 'none'
+      }
+      if (videoElement) {
+        videoElement.style.opacity = '1'
+      }
+    })
     
     const container = document.getElementById('avatar-container')
     if (container) {

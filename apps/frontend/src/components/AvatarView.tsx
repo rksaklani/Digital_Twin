@@ -19,24 +19,43 @@ export function AvatarView() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#111',
         position: 'relative',
       }}
     >
       <div
+        className="glass-card"
         style={{
           width: '512px',
           height: '512px',
-          backgroundColor: '#222',
-          borderRadius: '8px',
+          borderRadius: '24px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           color: '#666',
-          fontSize: '14px',
+          fontSize: '16px',
+          fontWeight: '500',
+          overflow: 'hidden',
+          position: 'relative',
+          transition: 'all 0.3s ease',
         }}
       >
-        Avatar will appear here
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'radial-gradient(circle at center, rgba(0, 0, 0, 0.05) 0%, transparent 70%)',
+          pointerEvents: 'none',
+          zIndex: 1,
+        }} />
+        <span 
+          id="avatar-placeholder"
+          style={{ 
+            position: 'relative',
+            zIndex: 2,
+            transition: 'opacity 0.3s ease',
+          }}
+        >
+          Avatar will appear here
+        </span>
       </div>
     </div>
   )
