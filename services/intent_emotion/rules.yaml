@@ -1,0 +1,86 @@
+# Intent and Emotion Classification Rules
+
+# Intent patterns
+intents:
+  question:
+    patterns:
+      - "?"
+      - "what"
+      - "how"
+      - "why"
+      - "when"
+      - "where"
+      - "who"
+      - "which"
+    weight: 1.0
+  
+  command:
+    patterns:
+      - "please"
+      - "can you"
+      - "could you"
+      - "would you"
+      - "do this"
+      - "make"
+      - "create"
+    weight: 1.0
+  
+  statement:
+    default: true
+    weight: 0.5
+
+# Emotion patterns
+emotions:
+  positive:
+    keywords:
+      - "happy"
+      - "good"
+      - "great"
+      - "excellent"
+      - "love"
+      - "like"
+      - "thanks"
+      - "thank you"
+      - "awesome"
+      - "amazing"
+    weight: 1.0
+  
+  negative:
+    keywords:
+      - "sad"
+      - "bad"
+      - "hate"
+      - "angry"
+      - "frustrated"
+      - "disappointed"
+      - "terrible"
+      - "awful"
+    weight: 1.0
+  
+  neutral:
+    default: true
+    weight: 0.5
+
+# Expression mapping (for avatar)
+expressions:
+  positive:
+    - smile
+    - eyes_wide
+  negative:
+    - frown
+    - eyes_narrow
+  neutral:
+    - default
+
+# Gesture triggers
+gestures:
+  question:
+    - head_tilt
+    - eyebrow_raise
+  command:
+    - nod
+  positive:
+    - smile
+  negative:
+    - head_shake
+

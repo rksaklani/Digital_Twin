@@ -1,0 +1,50 @@
+# WebRTC Configuration
+
+# ICE servers
+ice_servers:
+  - urls:
+      - "stun:stun.l.google.com:19302"
+      - "stun:stun1.l.google.com:19302"
+    username: null
+    credential: null
+
+# Codec preferences
+codecs:
+  video:
+    preferred: "VP8"
+    fallback: "VP9"
+    alternatives: ["H264"]
+    bitrate: 2000000  # 2 Mbps
+  
+  audio:
+    preferred: "OPUS"
+    fallback: "PCMU"
+    bitrate: 64000  # 64 kbps
+    sample_rate: 48000
+    channels: 1
+
+# Connection settings
+connection:
+  ice_transport_policy: "all"  # all or relay
+  bundle_policy: "max-bundle"
+  rtcp_mux_policy: "require"
+  
+# Bandwidth limits
+bandwidth:
+  video_max: 2000000  # 2 Mbps
+  video_min: 500000   # 500 kbps
+  audio_max: 128000   # 128 kbps
+  audio_min: 32000    # 32 kbps
+
+# Timeouts
+timeouts:
+  connection_ms: 10000
+  ice_connection_ms: 5000
+  data_channel_ms: 3000
+
+# Debug
+debug:
+  log_sdp: false
+  log_ice: false
+  log_stats: true
+

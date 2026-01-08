@@ -1,0 +1,57 @@
+# Latency Configuration
+# Target latencies and buffer sizes for real-time performance
+
+# Target latencies (milliseconds)
+targets:
+  audio_capture_to_stt: 200
+  stt_to_llm_start: 500
+  llm_first_token: 800
+  llm_to_tts_start: 100
+  tts_to_avatar_sync: 50
+  end_to_end_first_word: 1500
+  end_to_end_full_response: 2500
+
+# Buffer sizes
+buffers:
+  audio_input_ms: 200
+  stt_chunk_ms: 1000
+  stt_overlap_ms: 200
+  tts_chunk_samples: 512
+  video_frame_buffer: 3
+
+# Streaming parameters
+streaming:
+  audio_sample_rate: 16000
+  audio_channels: 1
+  audio_chunk_ms: 20
+  video_fps: 25
+  video_frame_ms: 40
+
+# Adaptive buffering
+adaptive:
+  enabled: true
+  min_buffer_ms: 100
+  max_buffer_ms: 500
+  adjustment_step_ms: 50
+  measure_window_seconds: 5
+
+# Interrupt handling
+interrupt:
+  detection_latency_ms: 50
+  cancellation_timeout_ms: 100
+  state_reset_timeout_ms: 200
+
+# Optimization hints
+optimization:
+  # Use smaller batch sizes for lower latency
+  stt_batch_size: 1
+  llm_batch_size: 1
+  tts_chunk_size: 512
+  
+  # Pre-warm models
+  prewarm_models: true
+  
+  # Use streaming where possible
+  streaming_stt: true
+  streaming_llm: true
+  streaming_tts: true

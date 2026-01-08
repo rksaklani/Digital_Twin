@@ -1,0 +1,46 @@
+# GPU Configuration
+# Memory allocation and optimization for RTX 4090 (24GB VRAM)
+
+device: "cuda:0"
+memory_fraction: 0.9  # Use 90% of available VRAM
+allow_growth: false
+
+# Model loading order (to minimize fragmentation)
+load_order:
+  - stt
+  - vad
+  - intent_emotion
+  - llm
+  - tts
+  - avatar
+
+# Memory allocation per service (in GB)
+memory_allocation:
+  stt: 2.0
+  vad: 0.5
+  intent_emotion: 1.0
+  llm: 8.0
+  tts: 3.0
+  avatar: 4.0
+  buffer: 5.5  # Reserve buffer
+
+# Optimization flags
+optimization:
+  torch_compile: false  # Can enable for PyTorch 2.0+
+  mixed_precision: true
+  cudnn_benchmark: true
+  cudnn_deterministic: false
+  
+# Batch sizes
+batch_sizes:
+  stt: 1
+  llm: 1
+  tts: 1
+  avatar: 1
+  intent_emotion: 8
+
+# Offloading (move to CPU when not active)
+offload_inactive:
+  enabled: true
+  idle_timeout_seconds: 30
+

@@ -1,0 +1,39 @@
+# Core dependencies
+torch>=2.1.0
+torchaudio>=2.1.0
+numpy>=1.24.0
+aiohttp>=3.9.0
+aiortc>=1.6.0
+websockets>=12.0
+
+# STT
+openai-whisper>=20231117
+faster-whisper>=0.10.0
+silero-vad>=4.0.0
+
+# LLM
+llama-cpp-python>=0.2.0
+transformers>=4.36.0
+sentencepiece>=0.1.99
+
+# TTS
+TTS>=0.22.0
+coqui-tts>=0.22.0
+
+# Avatar/Lip Sync
+opencv-python>=4.8.0
+mediapipe>=0.10.8
+face-alignment>=1.4.0
+
+# Utilities
+pyyaml>=6.0.1
+pydantic>=2.5.0
+python-dotenv>=1.0.0
+asyncio-mqtt>=0.16.0
+
+# Development
+pytest>=7.4.3
+pytest-asyncio>=0.21.1
+black>=23.12.0
+mypy>=1.7.0
+
